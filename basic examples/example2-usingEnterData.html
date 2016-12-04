@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Example of D3 usage</title>
+
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+    </head>
+    <body>
+
+        <p>Something 1</p>
+        <p>Something 2</p>
+        <p>Something 3</p>
+
+        <script>
+        /* It will create new "p" tags for the rest of the elements in the data array. */
+        d3.select("body")
+          .selectAll("p")
+          .data([4, 8, 15, 16, 23, 42])
+          .enter().append("p")
+            .text(function(d) { return "I’m number " + d + "!"; });
+        </script>
+
+    </body>
+</html>

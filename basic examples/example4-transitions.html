@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Example of D3 usage</title>
+
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+    </head>
+    <body>
+
+        <circle>Something 1</circle>
+        <circle>Something 2</circle>
+        <circle>Something 3</circle>
+
+        <script>
+        d3.select("body")
+            .transition()
+            .duration(2000)
+            .style("background-color", "black");
+        </script>
+
+    </body>
+</html>

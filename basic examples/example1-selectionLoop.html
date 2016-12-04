@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Example of D3 usage</title>
+
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+    </head>
+    <body>
+
+        <p>Something 1</p>
+        <p>Something 2</p>
+        <p>Something 3</p>
+        <p>Something 4</p>
+        <p>Something 5</p>
+        <p>Something 6</p>
+        <p>Something 7</p>
+        <p>Something 8</p>
+
+        <script>
+        d3.selectAll("p")
+          .data([4, 8, 15, 16, 23, 42])
+            .style("font-size", function(d) { return d + "px"; });
+        </script>
+
+    </body>
+</html>

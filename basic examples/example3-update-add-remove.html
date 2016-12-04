@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Example of D3 usage</title>
+
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+    </head>
+    <body>
+
+        <p>Something 1</p>
+        <p>Something 2</p>
+        <p>Something 3</p>
+
+        <script>
+        // Update
+        var p = d3.select("body")
+          .selectAll("p")
+          .data([4, 8, 15, 16, 23, 42])
+            .text(function(d) { return d; });
+
+        // Enter…
+        p.enter().append("span")
+            .text(function(d) { return " " + d; });
+
+        // Exit…
+        p.exit().remove();
+        </script>
+
+    </body>
+</html>
