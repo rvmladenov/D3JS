@@ -3,42 +3,58 @@
     <head>
         <title>Example of D3 usage</title>
         <script src="https://d3js.org/d3.v4.min.js"></script>
+
+        <style type="text/css">
+            g.group0 path,
+            g.group0 circle {
+                stroke: red;
+                fill: none;
+            }
+
+            g.group0 circle:hover {
+                r: 10;
+                fill: blue;
+                stroke: blue;
+            }
+        </style>
     </head>
     <body>
 
         <script>
         var data = [{x:5, y:5}, {x:10, y:15}, {x:20, y:7}, {x:30, y:18}, {x:40, y:10}];
+        var interpolateTypes = [
+            d3.curveLinear, d3.curveNatural, d3.curveStep,
+            d3.curveBasis, d3.curveBundle, d3.curveCardinal];
 
-        var svg = d3.select("body").append("svg").attr("height", "100%").attr("width", "100%");
+        var svg = d3.select("body").append("svg").attr("height", "400px").attr("width", "100%");
 
-        var line = d3.line()
-            .x(function(d, i) { return d.x*6; })
-            .y(function(d, i) { return d.y*1; });
 
-        svg.append("path")
-            .attr("d", line(data))
-            .attr("fill", "none")
-            .attr("stroke", "yellow");
+        for(var p = 0; p <interpolateTypes.length; p++ ) {
 
-        var line2 = d3.line()
-            .x(function(d, i) { return d.x*10; })
-            .y(function(d, i) { return d.y*5; })
-            .curve(d3.curveStep);
+            var line = d3.line()
+                .x(function(d, i) { return d.x*6; })
+                .y(function(d, i) { return d.y*4; })
+                .curve(interpolateTypes[p]);
 
-        svg.append("path")
-            .attr("d", line2(data))
-            .attr("fill", "none")
-            .attr("stroke", "blue");
+            var transX = 250*p;
+            var transY = 50*p;
+            var chartGroup = svg.append("g")
+                .attr("class", "group"+p)
+                .attr("transform", "translate(0, "+transY+")");
 
-        var line3 = d3.line()
-            .x(function(d, i) { return d.x*10; })
-            .y(function(d, i) { return d.y*10; })
-            .curve(d3.curveCardinal);
+            chartGroup.append("path")
+                .attr("d", line(data))
+                .attr("fill", "none")
+                .attr("stroke", "blue");
 
-        svg.append("path")
-            .attr("d", line3(data))
-            .attr("fill", "none")
-            .attr("stroke", "red");
+            chartGroup.selectAll('circle.grp'+p)
+                .data(data)
+                .enter().append("circle")
+                    .attr("class", function(d, i) { return "grp"+i })
+                    .attr("cx", function(d, i) { return d.x*6; })
+                    .attr("cy", function(d, i) { return d.y*4; })
+                    .attr("r", "4");
+        }
         </script>
 
     </body>
